@@ -26,7 +26,7 @@
 //
 //   Geometrie de la scene :
 //        Methodes d'instance de la classe RopewayScene
-//   - float cableHeight () : hauteur du cable
+//   - float cableHeight () : hauteur du cableq
 //   - float[] cableStart () : position de depart du cable (2 floats)
 //   - float cableLength () : longueur du cable
 //   - int ropewaySpeed () : valeur recommandee pour l'increment de mouvement
@@ -37,18 +37,39 @@
 /** First training session on geometric transforms. */
 public class Exo1 extends RopewayScene
 {
-  /** Ropeway run length. */
   private float distance = 0.0f;
+
 
 
   /** Returns the next animation step pose.
    * @param pose Already allocated vector to fill in with new pose values.
    */
-  public boolean nextStep (float[] pose)
-  {
-    // A MODIFIER
-    pose[11] = 0.5f;
-    return (false);
+  public boolean nextStep(float[] pose) {
+
+    if (distance >= cableLength()){
+      return false;
+    }
+    
+    pose[0] = 1.0f;   
+    pose[1] = 0.0f;   
+    pose[2] = 0.0f;  
+    pose[3] = cableStart()[0] + distance;  
+    pose[4] = 0.0f;   
+    pose[5] = 1.0f;   
+    pose[6] = 0.0f;   
+    pose[7] =  cableStart()[1];  
+    pose[8] = 0.0f;   
+    pose[9] = 0.0f;   
+    pose[10] = 1.0f;  
+    pose[11] = cableHeight();
+    pose[12] = 0.0f;  
+    pose[13] = 0.0f;  
+    pose[14] = 0.0f;  
+    pose[15] = 1.0f;  
+
+    distance += ropewaySpeed();
+    return true;
+  
   }
 
   /** Constructs the 3D scene used for training.
